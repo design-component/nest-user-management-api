@@ -12,7 +12,7 @@ async function bootstrap() {
   // Enable CORS with specific options
   app.enableCors({
     origin: true, // Replace with the frontend URL
-    methods: 'GET,POST,PUT,DELETE', // Allowed HTTP methods
+    methods: 'GET,POST,PUT,DELETE,PATCH', // Allowed HTTP methods
     credentials: true, // If you need to send cookies or Authorization headers
     allowedHeaders: 'Content-Type,Authorization', // Allowed headers
   });
@@ -43,6 +43,8 @@ async function bootstrap() {
     ],
   });
   await app.listen(env.port);
-  console.log('run at=> ' + ((await app.getUrl()) + '/api'));
+  console.log(
+    'run at=> ' + ((await app.getUrl()) + '/api').replace('[::1]', 'localhost'),
+  );
 }
 bootstrap();
